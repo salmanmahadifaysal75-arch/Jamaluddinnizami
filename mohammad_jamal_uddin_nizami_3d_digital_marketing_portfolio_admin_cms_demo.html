@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohammad Jamal Uddin Nizami | Professional Digital Marketing Expert</title>
+  <meta name="description" content="All-Sector Digital Marketing Specialist specializing in Meta Ads, Google Ads, Technical SEO, Lead Generation, and Conversion Rate Optimization." />
+
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Three.js (r128) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            obsidian: '#030712',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #030712;
+      color: #f8fafc;
+      overflow-x: hidden;
+    }
+
+    /* Global Persistent 3D WebGL Background */
+    #global-3d-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Interactive Mouse Spotlight & Trail */
+    #cursor-spotlight {
+      position: fixed;
+      width: 560px;
+      height: 560px;
+      border-radius: 9999px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.16) 0%, rgba(139, 92, 246, 0.12) 35%, rgba(217, 70, 239, 0.04) 60%, transparent 75%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      transition: opacity 0.3s ease;
+      mix-blend-mode: screen;
+    }
+
+    #cursor-ring {
+      position: fixed;
+      width: 34px;
+      height: 34px;
+      border-radius: 9999px;
+      border: 1.5px solid rgba(56, 189, 248, 0.75);
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.55);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    #cursor-ring.active-hover {
+      width: 54px;
+      height: 54px;
+      border-color: #e879f9;
+      background-color: rgba(217, 70, 239, 0.1);
+    }
+
+    /* Click Shockwave Particle Ripple */
+    .click-shockwave {
+      position: fixed;
+      border-radius: 9999px;
+      border: 2px solid #38bdf8;
+      box-shadow: 0 0 25px #8b5cf6, inset 0 0 15px #06b6d4;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0);
+      animation: shockwaveExpand 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      z-index: 9998;
+    }
+
+    @keyframes shockwaveExpand {
+      0% { width: 10px; height: 10px; opacity: 1; transform: translate(-50%, -50%) scale(0.4); }
+      100% { width: 140px; height: 140px; opacity: 0; transform: translate(-50%, -50%) scale(1.4); }
+    }
+
+    /* Animated Mesh Gradient Orbs */
+    .bg-orb {
+      position: fixed;
+      border-radius: 9999px;
+      filter: blur(110px);
+      opacity: 0.32;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatOrb 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+      50% { transform: translate(55px, -40px) scale(1.14) rotate(10deg); }
+      100% { transform: translate(-45px, 50px) scale(0.92) rotate(-10deg); }
+    }
+
+    /* 3D Tilt & Specular Sheen Glassmorphism Cards */
+    .glass-card {
+      position: relative;
+      background: rgba(15, 23, 42, 0.52);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.7);
+      transform-style: preserve-3d;
+      transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(56, 189, 248, 0.16), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .glass-card:hover::before {
+      opacity: 1;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(56, 189, 248, 0.55);
+      box-shadow: 0 28px 65px -12px rgba(79, 70, 229, 0.38);
+    }
+
+    .gradient-text {
+      background: linear-gradient(120deg, #38bdf8 0%, #818cf8 35%, #e879f9 70%, #38bdf8 100%);
+      background-size: 220% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textShimmer 5s linear infinite;
+    }
+
+    @keyframes textShimmer {
+      to { background-position: 220% center; }
+    }
+
+    .btn-luxury {
+      background: linear-gradient(135deg, #2563eb 0%, #7c3aed 48%, #db2777 100%);
+      background-size: 220% 220%;
+      animation: gradientShift 4s ease infinite;
+      transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .animate-float-card {
+      animation: floatSlow 5.5s ease-in-out infinite;
+    }
+
+    /* High-Energy Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(38px) scale(0.97);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #030712; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #3b82f6, #9333ea); border-radius: 9999px; }
+  </style>
+</head>
+<body class="antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- Full-Viewport Persistent 3D WebGL Scene + Interactive Mouse FX -->
+  <div id="global-3d-canvas"></div>
+  <div id="cursor-spotlight" class="hidden md:block"></div>
+  <div id="cursor-ring" class="hidden md:block"></div>
+
+  <!-- Ambient Luxury Lighting Orbs -->
+  <div class="bg-orb w-[460px] h-[460px] bg-blue-600 top-[-100px] left-[-120px]"></div>
+  <div class="bg-orb w-[500px] h-[500px] bg-purple-700 top-[35%] right-[-160px]" style="animation-delay: -6s;"></div>
+  <div class="bg-orb w-[420px] h-[420px] bg-cyan-600 bottom-[-100px] left-[20%]" style="animation-delay: -11s;"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed top-20 right-4 z-[100] flex flex-col gap-3 max-w-sm w-full pointer-events-none"></div>
+
+  <!-- ===================================================================== -->
+  <!-- TOP NAVIGATION BAR (PUBLIC + ADMIN SWITCHER)                          -->
+  <!-- ===================================================================== -->
+  <header class="fixed top-0 inset-x-0 z-50 border-b border-slate-800/70 bg-obsidian/80 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+      <!-- Brand Identity -->
+      <a href="#hero" onclick="switchView('public')" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl btn-luxury flex items-center justify-center font-display font-extrabold text-white text-lg shadow-lg shadow-indigo-500/30">
+          JN
+        </div>
+        <div class="hidden sm:block">
+          <div class="font-display font-bold text-sm lg:text-base text-white tracking-tight group-hover:text-cyan-400 transition">
+            Mohammad Jamal Uddin Nizami
+          </div>
+          <div class="text-[11px] text-slate-400">Digital Marketing Expert</div>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav id="public-nav-links" class="hidden xl:flex items-center gap-6 text-sm font-medium text-slate-300">
+        <a href="#about" class="hover:text-cyan-400 transition">About</a>
+        <a href="#services" class="hover:text-cyan-400 transition">Services</a>
+        <a href="#skills" class="hover:text-cyan-400 transition">Skills</a>
+        <a href="#portfolio" class="hover:text-cyan-400 transition">Portfolio</a>
+        <a href="#process" class="hover:text-cyan-400 transition">Process</a>
+        <a href="#faq" class="hover:text-cyan-400 transition">FAQ</a>
+        <a href="#contact" class="hover:text-cyan-400 transition">Hire Me</a>
+      </nav>
+
+      <!-- Dynamic Header Contact Pill + Mode Switcher -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Populated dynamically ONLY when WhatsApp/Email configured in Admin -->
+        <div id="header-dynamic-contact" class="hidden md:flex items-center gap-2"></div>
+
+        <!-- Live Motion Level Indicator & Cycle Button -->
+        <button id="motion-level-btn" onclick="cycleMotionIntensity()" title="Toggle 3D Motion Intensity" class="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-xl border border-purple-500/40 bg-purple-500/15 text-purple-200 text-xs font-bold hover:bg-purple-500/25 transition">
+          <span class="w-2 h-2 rounded-full bg-fuchsia-400 animate-ping"></span>
+          <span>Motion: <span id="motion-level-text" class="text-cyan-300">MAX</span></span>
+        </button>
+
+        <!-- Toggle Admin CMS Demo -->
+        <button id="view-toggle-btn" onclick="toggleAdminView()" class="magnetic-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border border-cyan-500/40 bg-cyan-500/10 text-cyan-300 hover:bg-cyan-500/20 hover:border-cyan-400 transition flex items-center gap-2 shadow-md">
+          <i data-lucide="shield-check" class="w-4 h-4"></i>
+          <span id="view-toggle-label">Admin CMS Demo</span>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="xl:hidden p-2.5 rounded-xl border border-slate-800 bg-slate-900/80 text-slate-200 hover:text-cyan-400" aria-label="Open Navigation">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-nav-drawer" class="hidden xl:hidden border-t border-slate-800 bg-obsidian/95 backdrop-blur-2xl px-4 pt-4 pb-6 space-y-3">
+      <div class="grid grid-cols-2 gap-2 text-sm">
+        <a href="#about" onclick="closeMobileMenu()" class="p-3 rounded-xl bg-slate-900/70 text-slate-200 hover:text-cyan-400">About Me</a>
+        <a href="#services" onclick="closeMobileMenu()" class="p-3 rounded-xl bg-slate-900/70 text-slate-200 hover:text-cyan-400">15 Services</a>
+        <a href="#skills" onclick="closeMobileMenu()" class="p-3 rounded-xl bg-slate-900/70 text-slate-200 hover:text-cyan-400">Skills & Tools</a>
+        <a href="#portfolio" onclick="closeMobileMenu()" class="p-3 rounded-xl bg-slate-900/70 text-slate-200 hover:text-cyan-400">Case Studies</a>
+        <a href="#process" onclick="closeMobileMenu()" class="p-3 rounded-xl bg-slate-900/70 text-slate-200 hover:text-cyan-400">Work Process</a>
+        <a href="#faq" onclick="closeMobileMenu()" class="p-3 rounded-xl bg-slate-900/70 text-slate-200 hover:text-cyan-400">FAQ</a>
+      </div>
+      <div id="mobile-dynamic-contact" class="pt-2 flex flex-wrap gap-2"></div>
+      <a href="#contact" onclick="closeMobileMenu()" class="block w-full text-center py-3 rounded-xl btn-luxury font-semibold text-white text-sm">
+        Start a Project / Hire Me
+      </a>
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- PUBLIC PORTFOLIO VIEW (12 ORDERED SECTIONS)                           -->
+  <!-- ===================================================================== -->
+  <main id="public-portfolio-view" class="relative z-10 pt-20">
+
+    <!-- 1. PREMIUM 3D HERO SECTION -->
+    <section id="hero" class="relative min-h-[92vh] flex items-center overflow-hidden py-16 sm:py-24">
+      <div class="absolute inset-0 bg-gradient-to-b from-obsidian/20 via-obsidian/45 to-obsidian/85 z-0 pointer-events-none"></div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          <!-- Hero Left Typography -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-indigo-500/40 bg-indigo-950/50 backdrop-blur-md text-xs sm:text-sm font-medium text-cyan-300">
+              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+              <span id="hero-positioning">All-Sector Digital Marketing Specialist</span>
+            </div>
+
+            <div class="space-y-2">
+              <p class="text-sm sm:text-base font-semibold uppercase tracking-widest text-indigo-400" id="hero-title">
+                Professional Digital Marketing Expert
+              </p>
+              <h1 class="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]" id="hero-name">
+                Mohammad Jamal Uddin Nizami
+              </h1>
+            </div>
+
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold gradient-text leading-snug" id="hero-headline">
+              "Turning Digital Strategies Into Measurable Business Growth."
+            </h2>
+
+            <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl" id="hero-supporting">
+              I help businesses grow through strategic digital marketing, performance advertising, SEO, social media marketing, and data-driven growth solutions.
+            </p>
+
+            <!-- Three Required Hero CTA Buttons -->
+            <div class="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
+              <a href="#contact" onclick="selectInquiryTab('PROJECT_INQUIRY')" class="magnetic-btn px-6 py-3.5 rounded-2xl btn-luxury text-white font-semibold text-sm sm:text-base shadow-xl shadow-indigo-600/30 hover:scale-[1.03] transition flex items-center gap-2">
+                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                <span>Hire Me</span>
+              </a>
+              <a href="#services" class="magnetic-btn px-6 py-3.5 rounded-2xl glass-card text-white font-semibold text-sm sm:text-base hover:bg-slate-800/80 transition flex items-center gap-2">
+                <i data-lucide="layers" class="w-4 h-4 text-cyan-400"></i>
+                <span>Explore My Services</span>
+              </a>
+              <a href="#portfolio" class="magnetic-btn px-6 py-3.5 rounded-2xl border border-slate-700/80 bg-slate-900/40 text-slate-200 font-semibold text-sm sm:text-base hover:border-purple-400 hover:text-white transition flex items-center gap-2">
+                <i data-lucide="briefcase" class="w-4 h-4 text-purple-400"></i>
+                <span>View My Work</span>
+              </a>
+            </div>
+
+            <!-- Dynamic Hero Contact Channels (Hidden if unconfigured in Admin) -->
+            <div id="hero-dynamic-contacts" class="pt-3 flex flex-wrap items-center gap-3"></div>
+          </div>
+
+          <!-- Hero Right Profile & 3D Interactive Card -->
+          <div class="lg:col-span-5">
+            <div class="glass-card animate-float-card rounded-3xl p-6 sm:p-8 relative overflow-hidden group">
+              <div class="absolute -top-24 -right-24 w-48 h-48 bg-cyan-500/20 rounded-full blur-2xl group-hover:bg-purple-500/30 transition"></div>
+
+              <div class="flex flex-col items-center text-center space-y-5">
+                <div class="relative">
+                  <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl p-1 btn-luxury shadow-2xl">
+                    <img
+                      id="hero-profile-img"
+                      src="https://placehold.co/400x400/0f172a/38bdf8?text=MJUN"
+                      onerror="this.src='https://placehold.co/400x400/0f172a/38bdf8?text=MJUN'"
+                      alt="Mohammad Jamal Uddin Nizami - Professional Digital Marketing Expert"
+                      class="w-full h-full object-cover rounded-[20px] bg-slate-950"
+                    />
+                  </div>
+                  <span id="hero-availability-badge" class="hidden absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap px-3 py-1 rounded-full bg-emerald-950/90 border border-emerald-500/50 text-emerald-300 text-[11px] font-semibold">
+                  </span>
+                </div>
+
+                <div class="space-y-1 pt-2">
+                  <h3 class="font-display font-bold text-lg text-white">Mohammad Jamal Uddin Nizami</h3>
+                  <p class="text-xs text-cyan-400 font-medium">All-Sector Digital Marketing Specialist</p>
+                </div>
+
+                <!-- Core Channel Badges (No fabricated metrics) -->
+                <div class="grid grid-cols-2 gap-2.5 w-full pt-2 text-left">
+                  <div class="p-3 rounded-2xl bg-slate-950/70 border border-slate-800/80">
+                    <div class="text-[11px] text-slate-400">Paid Acquisition</div>
+                    <div class="text-xs font-semibold text-white mt-0.5">Meta, Google & TikTok Ads</div>
+                  </div>
+                  <div class="p-3 rounded-2xl bg-slate-950/70 border border-slate-800/80">
+                    <div class="text-[11px] text-slate-400">Organic Growth</div>
+                    <div class="text-xs font-semibold text-white mt-0.5">Technical, On/Off-Page SEO</div>
+                  </div>
+                  <div class="p-3 rounded-2xl bg-slate-950/70 border border-slate-800/80">
+                    <div class="text-[11px] text-slate-400">Conversion Systems</div>
+                    <div class="text-xs font-semibold text-white mt-0.5">Lead Funnels & CRO</div>
+                  </div>
+                  <div class="p-3 rounded-2xl bg-slate-950/70 border border-slate-800/80">
+                    <div class="text-[11px] text-slate-400">Interactive 3D</div>
+                    <div class="text-xs font-semibold text-cyan-400 mt-0.5">Move cursor to orbit 3D</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ABOUT ME SECTION -->
+    <section id="about" class="py-20 sm:py-28 border-t border-slate-900/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-5 space-y-4">
+            <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">01 // Executive Profile</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+              Precision Marketing Engineered for <span class="gradient-text">All-Sector Growth</span>
+            </h2>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Every industry requires a tailored customer acquisition architecture—combining intent capture, persuasive creative testing, and conversion telemetry.
+            </p>
+          </div>
+
+          <div class="lg:col-span-7 glass-card rounded-3xl p-6 sm:p-10 space-y-5">
+            <p class="text-slate-200 text-base sm:text-lg leading-relaxed" id="about-bio">
+              Mohammad Jamal Uddin Nizami is a Professional Digital Marketing Expert and All-Sector Digital Marketing Specialist dedicated to helping startups, e-commerce brands, service providers, and international enterprises build predictable revenue pipelines.
+            </p>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Rather than relying on vanity metrics, every campaign is structured around full-funnel attribution—connecting Meta Ads, Google Ads, TikTok Ads, and multi-layered Search Engine Optimization directly to qualified leads and measurable customer acquisition.
+            </p>
+            <div class="grid sm:grid-cols-3 gap-4 pt-3 border-t border-slate-800">
+              <div>
+                <div class="text-cyan-400 font-bold text-sm">Multi-Channel Synergy</div>
+                <p class="text-xs text-slate-400 mt-1">Unified paid & organic demand capture across search and social.</p>
+              </div>
+              <div>
+                <div class="text-purple-400 font-bold text-sm">All-Sector Adaptability</div>
+                <p class="text-xs text-slate-400 mt-1">Custom ICP research for B2B, SaaS, E-Commerce, Local & Global brands.</p>
+              </div>
+              <div>
+                <div class="text-pink-400 font-bold text-sm">Data & Telemetry First</div>
+                <p class="text-xs text-slate-400 mt-1">Server-side conversion tracking, GA4 funnels, and iterative CRO.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. DIGITAL MARKETING SERVICES (ALL 15 REQUIRED SERVICES) -->
+    <section id="services" class="py-20 sm:py-28 border-t border-slate-900/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+        <div class="text-center max-w-3xl mx-auto space-y-4 mb-14">
+          <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">02 // Full-Spectrum Capabilities</span>
+          <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white">
+            Digital Marketing <span class="gradient-text">Services</span>
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base">
+            Select any specialized service below to request a tailored campaign strategy or quotation directly.
+          </p>
+        </div>
+
+        <!-- Rendered via JS from all 15 services -->
+        <div id="services-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      </div>
+    </section>
+
+    <!-- 4. PROFESSIONAL EXPERTISE & 5. SKILLS & TOOLS -->
+    <section id="skills" class="py-20 sm:py-28 border-t border-slate-900/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+        <div class="grid lg:grid-cols-12 gap-12 items-start">
+          <!-- 4. Professional Expertise -->
+          <div class="lg:col-span-5 space-y-6">
+            <span class="text-xs font-bold uppercase tracking-widest text-purple-400">03 // Professional Expertise</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white">
+              Technical Mastery & <span class="gradient-text">Growth Stack</span>
+            </h2>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Modern digital marketing demands fluency across ad auction algorithms, technical crawl architecture, conversion tracking pixels, and behavioral landing page optimization.
+            </p>
+
+            <div class="space-y-4">
+              <div class="glass-card rounded-2xl p-5">
+                <h3 class="font-semibold text-white text-sm flex items-center gap-2">
+                  <i data-lucide="target" class="w-4 h-4 text-cyan-400"></i>
+                  Performance Media Buying
+                </h3>
+                <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
+                  Structured campaign testing (CBO/ABO), lookalike & intent audience modeling, creative fatigue rotation, and ROAS-focused bid scaling.
+                </p>
+              </div>
+              <div class="glass-card rounded-2xl p-5">
+                <h3 class="font-semibold text-white text-sm flex items-center gap-2">
+                  <i data-lucide="search" class="w-4 h-4 text-purple-400"></i>
+                  Search & Video Authority
+                </h3>
+                <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
+                  Technical site audits, Core Web Vitals, semantic topic clusters, YouTube retention optimization, and authoritative link acquisition.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Skills & Tools (8 Core Skills with Proficiency Indicators) -->
+          <div class="lg:col-span-7 glass-card rounded-3xl p-6 sm:p-8 space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+              <h3 class="font-display font-bold text-xl text-white">Core Skills & Platforms</h3>
+              <span class="text-xs text-slate-400">Admin-Configurable</span>
+            </div>
+            <div id="skills-list" class="grid sm:grid-cols-2 gap-5"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. PORTFOLIO / CASE STUDIES (STRICT NO-FABRICATION POLICY) -->
+    <section id="portfolio" class="py-20 sm:py-28 border-t border-slate-900/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div class="space-y-3">
+            <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">04 // Verified Case Studies</span>
+            <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white">
+              Portfolio & <span class="gradient-text">Case Studies</span>
+            </h2>
+          </div>
+          <button onclick="openAdminModule('portfolio')" class="self-start md:self-auto px-4 py-2.5 rounded-xl border border-indigo-500/40 bg-indigo-500/10 text-indigo-300 text-xs font-semibold hover:bg-indigo-500/20 transition flex items-center gap-2">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i>
+            <span>Manage Case Studies in Admin</span>
+          </button>
+        </div>
+
+        <div id="portfolio-container"></div>
+      </div>
+    </section>
+
+    <!-- 7. MY WORK PROCESS -->
+    <section id="process" class="py-20 sm:py-28 border-t border-slate-900/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+        <div class="text-center max-w-3xl mx-auto space-y-3 mb-14">
+          <span class="text-xs font-bold uppercase tracking-widest text-purple-400">05 // Execution Blueprint</span>
+          <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white">
+            My Work <span class="gradient-text">Process</span>
+          </h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
+          <div class="glass-card rounded-3xl p-6 space-y-3 relative">
+            <div class="w-11 h-11 rounded-2xl bg-blue-500/15 border border-blue-500/40 text-blue-400 font-display font-extrabold flex items-center justify-center">01</div>
+            <h3 class="font-display font-bold text-base text-white">Discovery & Audit</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Deep-dive analysis of your funnel, ad accounts, technical SEO health, competitors, and unit economics.</p>
+          </div>
+          <div class="glass-card rounded-3xl p-6 space-y-3 relative">
+            <div class="w-11 h-11 rounded-2xl bg-purple-500/15 border border-purple-500/40 text-purple-400 font-display font-extrabold flex items-center justify-center">02</div>
+            <h3 class="font-display font-bold text-base text-white">Strategy Blueprint</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Custom media mix roadmap, keyword mapping, ICP targeting, and conversion offer positioning.</p>
+          </div>
+          <div class="glass-card rounded-3xl p-6 space-y-3 relative">
+            <div class="w-11 h-11 rounded-2xl bg-indigo-500/15 border border-indigo-500/40 text-indigo-400 font-display font-extrabold flex items-center justify-center">03</div>
+            <h3 class="font-display font-bold text-base text-white">Tracking & Funnel Setup</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Server-side CAPI/Pixel telemetry, GA4 attribution, landing page CRO, and lead routing setup.</p>
+          </div>
+          <div class="glass-card rounded-3xl p-6 space-y-3 relative">
+            <div class="w-11 h-11 rounded-2xl bg-cyan-500/15 border border-cyan-500/40 text-cyan-400 font-display font-extrabold flex items-center justify-center">04</div>
+            <h3 class="font-display font-bold text-base text-white">Launch & Creative Testing</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Structured campaign deployment with multi-variant ad creative testing and technical on-page execution.</p>
+          </div>
+          <div class="glass-card rounded-3xl p-6 space-y-3 relative sm:col-span-2 lg:col-span-1">
+            <div class="w-11 h-11 rounded-2xl bg-pink-500/15 border border-pink-500/40 text-pink-400 font-display font-extrabold flex items-center justify-center">05</div>
+            <h3 class="font-display font-bold text-base text-white">Optimize & Scale</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Continuous A/B split testing, wasted-spend elimination, bid scaling, and transparent weekly KPI reporting.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. WHY CHOOSE ME -->
+    <section id="why-choose-me" class="py-20 sm:py-28 border-t border-slate-900/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+        <div class="glass-card rounded-3xl p-8 sm:p-12 relative overflow-hidden">
+          <div class="max-w-2xl space-y-3 mb-10">
+            <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">06 // Competitive Advantage</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white">
+              Why Partner With <span class="gradient-text">Mohammad Jamal Uddin Nizami</span>
+            </h2>
+          </div>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="p-5 rounded-2xl bg-slate-950/60 border border-slate-800/90 space-y-2.5">
+              <i data-lucide="bar-chart-3" class="w-6 h-6 text-cyan-400"></i>
+              <h3 class="font-bold text-white text-base">ROI & Lead Accountability</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">Campaigns are measured by qualified pipeline, CPA, and revenue growth—never empty clicks.</p>
+            </div>
+            <div class="p-5 rounded-2xl bg-slate-950/60 border border-slate-800/90 space-y-2.5">
+              <i data-lucide="layers" class="w-6 h-6 text-purple-400"></i>
+              <h3 class="font-bold text-white text-base">360° Integrated Execution</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">Seamless alignment between Paid Ads, SEO, Social Media, and Landing Page CRO under one strategist.</p>
+            </div>
+            <div class="p-5 rounded-2xl bg-slate-950/60 border border-slate-800/90 space-y-2.5">
+              <i data-lucide="globe-2" class="w-6 h-6 text-blue-400"></i>
+              <h3 class="font-bold text-white text-base">International Market Readiness</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">Experienced in targeting global, regional, and local audiences across diverse business verticals.</p>
+            </div>
+            <div class="p-5 rounded-2xl bg-slate-950/60 border border-slate-800/90 space-y-2.5">
+              <i data-lucide="file-check-2" class="w-6 h-6 text-pink-400"></i>
+              <h3 class="font-bold text-white text-base">100% Transparent Reporting</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">Full ownership of your ad accounts, analytics properties, and clear weekly executive summaries.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. CLIENT TESTIMONIALS (ONLY ADMIN-APPROVED GENUINE REVIEWS) -->
+    <section id="testimonials" class="py-20 sm:py-28 border-t border-slate-900/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div class="space-y-3">
+            <span class="text-xs font-bold uppercase tracking-widest text-purple-400">07 // Verified Endorsements</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white">
+              Client <span class="gradient-text">Testimonials</span>
+            </h2>
+          </div>
+          <button onclick="openAdminModule('portfolio')" class="self-start md:self-auto px-4 py-2.5 rounded-xl border border-purple-500/40 bg-purple-500/10 text-purple-300 text-xs font-semibold hover:bg-purple-500/20 transition flex items-center gap-2">
+            <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+            <span>Approve Testimonials in Admin</span>
+          </button>
+        </div>
+
+        <div id="testimonials-container"></div>
+      </div>
+    </section>
+
+    <!-- 10. FREQUENTLY ASKED QUESTIONS (FAQ) -->
+    <section id="faq" class="py-20 sm:py-28 border-t border-slate-900/80">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+        <div class="text-center space-y-3 mb-12">
+          <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">08 // Clarity & Process</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white">
+            Frequently Asked <span class="gradient-text">Questions</span>
+          </h2>
+        </div>
+
+        <div id="faq-accordion" class="space-y-4"></div>
+      </div>
+    </section>
+
+    <!-- 11. CONTACT & HIRE ME (CLIENT ACQUISITION SYSTEM) -->
+    <section id="contact" class="py-20 sm:py-28 border-t border-slate-900/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+        <div class="grid lg:grid-cols-12 gap-10 items-start">
+          <!-- Left Column: Dynamic Contact Details & Direct Channels -->
+          <div class="lg:col-span-5 space-y-6">
+            <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">09 // Client Acquisition</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+              Let’s Scale Your Business <span class="gradient-text">Together</span>
+            </h2>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Submit a project inquiry, request a custom quotation, or book a free strategy consultation. Every submission is logged directly into the CRM pipeline.
+            </p>
+
+            <!-- Dynamic Contact Information Cards (Strictly renders ONLY admin-configured fields) -->
+            <div id="contact-section-dynamic-cards" class="space-y-3"></div>
+
+            <!-- Dynamic Social Media Links -->
+            <div id="contact-section-socials" class="pt-2"></div>
+          </div>
+
+          <!-- Right Column: Multi-Mode Lead Generation Form -->
+          <div class="lg:col-span-7 glass-card rounded-3xl p-6 sm:p-10">
+            <!-- Inquiry Type Tabs -->
+            <div class="grid grid-cols-3 gap-2 p-1.5 rounded-2xl bg-slate-950/90 border border-slate-800 mb-6">
+              <button type="button" onclick="selectInquiryTab('PROJECT_INQUIRY')" id="tab-PROJECT_INQUIRY" class="inquiry-tab py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold transition bg-indigo-600 text-white">
+                Project Inquiry
+              </button>
+              <button type="button" onclick="selectInquiryTab('QUOTATION')" id="tab-QUOTATION" class="inquiry-tab py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold transition text-slate-400 hover:text-white">
+                Request Quotation
+              </button>
+              <button type="button" onclick="selectInquiryTab('FREE_CONSULTATION')" id="tab-FREE_CONSULTATION" class="inquiry-tab py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold transition text-slate-400 hover:text-white">
+                Free Consultation
+              </button>
+            </div>
+
+            <form id="lead-acquisition-form" onsubmit="handleLeadSubmit(event)" class="space-y-4">
+              <input type="hidden" id="form-inquiry-type" value="PROJECT_INQUIRY" />
+              <!-- Honeypot Spam Protection -->
+              <input type="text" id="form-honeypot" class="hidden" tabindex="-1" autocomplete="off" />
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-medium text-slate-300 mb-1.5">Full Name *</label>
+                  <input type="text" id="lead-fullName" required placeholder="Your full name" class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm focus:border-cyan-400 focus:outline-none" />
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-slate-300 mb-1.5">Business Email *</label>
+                  <input type="email" id="lead-businessEmail" required placeholder="name@company.com" class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm focus:border-cyan-400 focus:outline-none" />
+                </div>
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-medium text-slate-300 mb-1.5">Phone / WhatsApp *</label>
+                  <input type="text" id="lead-phoneWhatsapp" required placeholder="+1 234 567 8900" class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm focus:border-cyan-400 focus:outline-none" />
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-slate-300 mb-1.5">Country *</label>
+                  <input type="text" id="lead-country" required placeholder="e.g., United States, UK, UAE" class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm focus:border-cyan-400 focus:outline-none" />
+                </div>
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-medium text-slate-300 mb-1.5">Company Name</label>
+                  <input type="text" id="lead-companyName" placeholder="Your company or brand" class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm focus:border-cyan-400 focus:outline-none" />
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-slate-300 mb-1.5">Website URL</label>
+                  <input type="url" id="lead-websiteUrl" placeholder="https://example.com" class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm focus:border-cyan-400 focus:outline-none" />
+                </div>
+              </div>
+
+              <div class="grid sm:grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-xs font-medium text-slate-300 mb-1.5">Required Service *</label>
+                  <select id="lead-requiredService" required class="w-full px-3.5 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm focus:border-cyan-400 focus:outline-none"></select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-slate-300 mb-1.5">Monthly Marketing Budget *</label>
+                  <select id="lead-monthlyBudget" required class="w-full px-3.5 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm focus:border-cyan-400 focus:outline-none">
+                    <option value="$500 - $1,000 / mo">$500 – $1,000 / mo</option>
+                    <option value="$1,000 - $3,000 / mo" selected>$1,000 – $3,000 / mo</option>
+                    <option value="$3,000 - $10,000 / mo">$3,000 – $10,000 / mo</option>
+                    <option value="$10,000+ / mo">$10,000+ / mo</option>
+                    <option value="Custom Project Quote">Custom Project Quote</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-slate-300 mb-1.5">Preferred Contact *</label>
+                  <select id="lead-preferredContact" required class="w-full px-3.5 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm focus:border-cyan-400 focus:outline-none">
+                    <option value="WhatsApp">WhatsApp</option>
+                    <option value="Email">Business Email</option>
+                    <option value="Phone">Phone Call</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1.5">Project Details & Goals *</label>
+                <textarea id="lead-projectDetails" rows="4" required placeholder="Describe your target audience, current challenges, and growth objectives..." class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white text-sm focus:border-cyan-400 focus:outline-none"></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-4 rounded-2xl btn-luxury text-white font-bold text-sm sm:text-base shadow-xl shadow-indigo-600/30 hover:opacity-95 transition flex items-center justify-center gap-2">
+                <i data-lucide="send" class="w-4 h-4"></i>
+                <span id="submit-btn-text">Submit Project Inquiry</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. FOOTER -->
+    <footer class="border-t border-slate-800/80 bg-slate-950/80 backdrop-blur-xl py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-8 items-center">
+          <div>
+            <div class="font-display font-extrabold text-lg text-white">Mohammad Jamal Uddin Nizami</div>
+            <div class="text-xs text-cyan-400 mt-1">Professional Digital Marketing Expert • All-Sector Digital Marketing Specialist</div>
+          </div>
+
+          <div id="footer-dynamic-contacts" class="flex flex-wrap md:justify-center gap-3"></div>
+
+          <div class="md:text-right text-xs text-slate-500">
+            <div>© <span id="current-year"></span> Mohammad Jamal Uddin Nizami. All rights reserved.</div>
+            <div class="mt-1">Technical SEO • Schema.org • Enterprise CMS Architecture</div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- FLOATING CONTACT WIDGET (Appears automatically when WhatsApp or Email is configured in Admin) -->
+  <div id="floating-contact-widget" class="hidden fixed bottom-6 right-6 z-40 flex flex-col gap-3"></div>
+
+  <!-- ===================================================================== -->
+  <!-- SECURE ADMIN DASHBOARD SIMULATION (/admin & /admin/login)             -->
+  <!-- ===================================================================== -->
+  <section id="admin-dashboard-view" class="hidden relative z-20 pt-24 pb-16 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- STEP A: ADMIN LOGIN SCREEN (Password: admin) -->
+      <div id="admin-login-box" class="max-w-md mx-auto glass-card rounded-3xl p-8 space-y-6 my-8">
+        <div class="text-center space-y-2">
+          <div class="w-12 h-12 rounded-2xl btn-luxury mx-auto flex items-center justify-center text-white shadow-lg">
+            <i data-lucide="lock" class="w-6 h-6"></i>
+          </div>
+          <h2 class="font-display font-extrabold text-2xl text-white">Admin Command Login</h2>
+          <p class="text-xs text-slate-400">Route: <code class="text-cyan-400">/admin/login</code> • Secure CMS Access</p>
+        </div>
+
+        <div class="p-3.5 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-xs text-cyan-200">
+          <strong>Admin Access Credential:</strong> Enter password <code class="px-1.5 py-0.5 rounded bg-slate-900 text-fuchsia-300 font-bold">admin</code> to unlock the full Website Management Dashboard immediately.
+        </div>
+
+        <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1.5">Admin Email</label>
+            <input type="email" id="admin-login-email" value="admin@nizami.local" required class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1.5">Password</label>
+            <input type="password" id="admin-login-password" value="admin" required class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+          </div>
+          <button type="submit" class="w-full py-3.5 rounded-xl btn-luxury text-white font-bold text-sm">
+            Login to Admin Dashboard
+          </button>
+        </form>
+      </div>
+
+      <!-- STEP B: FULL INTERACTIVE ADMIN CMS WORKSPACE -->
+      <div id="admin-cms-workspace" class="hidden space-y-6">
+        <!-- Admin Header Bar -->
+        <div class="glass-card rounded-3xl p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+              <span class="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Authenticated Super Admin</span>
+            </div>
+            <h1 class="font-display text-xl sm:text-2xl font-extrabold text-white mt-1">
+              Website Command Center (<code class="text-cyan-400 text-base">/admin</code>)
+            </h1>
+          </div>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button onclick="switchView('public')" class="px-4 py-2.5 rounded-xl bg-cyan-500/15 border border-cyan-500/40 text-cyan-300 text-xs font-semibold hover:bg-cyan-500/25 transition flex items-center gap-2">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+              <span>Preview Live Website</span>
+            </button>
+            <button onclick="handleAdminLogout()" class="px-4 py-2.5 rounded-xl bg-rose-500/15 border border-rose-500/40 text-rose-300 text-xs font-semibold hover:bg-rose-500/25 transition">
+              Logout
+            </button>
+          </div>
+        </div>
+
+        <!-- CMS Module Navigation Tabs -->
+        <div class="flex flex-wrap gap-2">
+          <button onclick="setAdminTab('overview')" id="adm-tab-overview" class="adm-nav-btn px-4 py-2.5 rounded-xl text-xs font-semibold bg-indigo-600 text-white">1. Overview</button>
+          <button onclick="setAdminTab('contacts')" id="adm-tab-contacts" class="adm-nav-btn px-4 py-2.5 rounded-xl text-xs font-semibold glass-card text-slate-300">2. Contact & Social Links</button>
+          <button onclick="setAdminTab('leads')" id="adm-tab-leads" class="adm-nav-btn px-4 py-2.5 rounded-xl text-xs font-semibold glass-card text-slate-300">3. Leads & Inquiries (<span id="admin-lead-badge">0</span>)</button>
+          <button onclick="setAdminTab('content')" id="adm-tab-content" class="adm-nav-btn px-4 py-2.5 rounded-xl text-xs font-semibold glass-card text-slate-300">4. Hero & 3D Settings</button>
+          <button onclick="setAdminTab('portfolio')" id="adm-tab-portfolio" class="adm-nav-btn px-4 py-2.5 rounded-xl text-xs font-semibold glass-card text-slate-300">5. Portfolio & Testimonials</button>
+        </div>
+
+        <!-- MODULE 1: OVERVIEW -->
+        <div id="adm-panel-overview" class="adm-panel grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div class="glass-card rounded-2xl p-6">
+            <div class="text-xs text-slate-400">Active Digital Services</div>
+            <div class="font-display font-extrabold text-3xl text-white mt-2">15</div>
+            <div class="text-xs text-emerald-400 mt-1">All Published</div>
+          </div>
+          <div class="glass-card rounded-2xl p-6">
+            <div class="text-xs text-slate-400">Captured Client Leads</div>
+            <div class="font-display font-extrabold text-3xl text-cyan-400 mt-2" id="stat-leads-count">0</div>
+            <div class="text-xs text-slate-400 mt-1">Real-time database sync</div>
+          </div>
+          <div class="glass-card rounded-2xl p-6">
+            <div class="text-xs text-slate-400">Published Case Studies</div>
+            <div class="font-display font-extrabold text-3xl text-purple-400 mt-2" id="stat-projects-count">0</div>
+            <div class="text-xs text-slate-400 mt-1">Zero fabricated projects</div>
+          </div>
+          <div class="glass-card rounded-2xl p-6">
+            <div class="text-xs text-slate-400">Configured Contact Channels</div>
+            <div class="font-display font-extrabold text-3xl text-pink-400 mt-2" id="stat-contacts-count">0</div>
+            <div class="text-xs text-slate-400 mt-1">Empty fields auto-hidden</div>
+          </div>
+        </div>
+
+        <!-- MODULE 2: CONTACT & SOCIAL LINKS MANAGEMENT -->
+        <div id="adm-panel-contacts" class="adm-panel hidden glass-card rounded-3xl p-6 sm:p-8 space-y-6">
+          <div class="border-b border-slate-800 pb-4">
+            <h2 class="font-display font-bold text-xl text-white">Centralized Contact & Social Configuration</h2>
+            <p class="text-xs text-slate-400 mt-1">Only populated fields appear on the public Header, Hero, Contact Section, Footer, and Floating Widget. Leave any field empty to hide it.</p>
+          </div>
+
+          <form onsubmit="saveContactSettings(event)" class="space-y-6">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">1. Professional Email Address</label>
+                <input type="email" id="cfg-email" placeholder="contact@yourdomain.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">2. WhatsApp Number (with Country Code)</label>
+                <input type="text" id="cfg-whatsapp" placeholder="8801XXXXXXXXX" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">3. Phone Number</label>
+                <input type="text" id="cfg-phone" placeholder="+880 1XXX-XXXXXX" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">4. Business Location</label>
+                <input type="text" id="cfg-location" placeholder="Dhaka, Bangladesh / Worldwide" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">5. Business Availability</label>
+                <input type="text" id="cfg-availability" placeholder="Available for International Projects" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">6. Preferred Contact Method</label>
+                <select id="cfg-preferred" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm">
+                  <option value="WhatsApp">WhatsApp</option>
+                  <option value="Business Email">Business Email</option>
+                  <option value="Phone Call">Phone Call</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800">
+              <h3 class="text-sm font-bold text-white mb-3">Social & Marketplace Profile URLs</h3>
+              <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-xs text-slate-400 mb-1">Facebook Profile URL</label>
+                  <input type="url" id="cfg-fb-profile" placeholder="https://facebook.com/..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs text-slate-400 mb-1">Facebook Business Page URL</label>
+                  <input type="url" id="cfg-fb-page" placeholder="https://facebook.com/..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs text-slate-400 mb-1">LinkedIn Profile URL</label>
+                  <input type="url" id="cfg-linkedin" placeholder="https://linkedin.com/in/..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs text-slate-400 mb-1">Instagram Profile URL</label>
+                  <input type="url" id="cfg-instagram" placeholder="https://instagram.com/..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs text-slate-400 mb-1">YouTube Channel URL</label>
+                  <input type="url" id="cfg-youtube" placeholder="https://youtube.com/@..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs text-slate-400 mb-1">Freelancer Profile URL</label>
+                  <input type="url" id="cfg-freelancer" placeholder="https://freelancer.com/u/..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <button type="submit" class="px-6 py-3 rounded-xl btn-luxury text-white font-bold text-sm">
+                Save & Publish Contact Info
+              </button>
+              <button type="button" onclick="clearAllContactSettings()" class="px-5 py-3 rounded-xl border border-slate-700 text-slate-300 text-xs font-semibold hover:bg-slate-800">
+                Clear All Fields (Test Auto-Hide)
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- MODULE 3: LEAD & INQUIRY MANAGEMENT -->
+        <div id="adm-panel-leads" class="adm-panel hidden glass-card rounded-3xl p-6 sm:p-8 space-y-5">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+            <div>
+              <h2 class="font-display font-bold text-xl text-white">Client Acquisition & Lead Pipeline</h2>
+              <p class="text-xs text-slate-400 mt-1">Submissions from the public inquiry, quotation, and consultation forms appear here immediately.</p>
+            </div>
+          </div>
+          <div id="admin-leads-table-container" class="overflow-x-auto"></div>
+        </div>
+
+        <!-- MODULE 4: HERO & 3D SETTINGS -->
+        <div id="adm-panel-content" class="adm-panel hidden glass-card rounded-3xl p-6 sm:p-8 space-y-5">
+          <h2 class="font-display font-bold text-xl text-white border-b border-slate-800 pb-4">Hero Content, Motion Level & Admin Password</h2>
+          <form onsubmit="saveHeroSettings(event)" class="space-y-4 max-w-2xl">
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Hero Headline</label>
+              <input type="text" id="edit-hero-headline" value="Turning Digital Strategies Into Measurable Business Growth." class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Profile Image URL</label>
+              <input type="url" id="edit-hero-image" placeholder="https://..." class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">3D & Cursor Animation Intensity</label>
+                <select id="edit-motion-level" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm">
+                  <option value="MAX" selected>MAX (Ultra High 3D + Cursor FX)</option>
+                  <option value="HIGH">HIGH (Standard 3D + Tilt)</option>
+                  <option value="LOW">REDUCED (Minimal Motion)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Admin Password (Default: admin)</label>
+                <input type="text" id="edit-admin-password" value="admin" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+              </div>
+            </div>
+            <div class="flex items-center gap-3 pt-2">
+              <input type="checkbox" id="edit-enable-3d" checked class="w-4 h-4 accent-cyan-500" />
+              <label for="edit-enable-3d" class="text-sm text-slate-200">Enable Full-Page Interactive Three.js 3D WebGL Universe</label>
+            </div>
+            <button type="submit" class="px-6 py-3 rounded-xl btn-luxury text-white font-bold text-sm">
+              Apply Changes to Live Site
+            </button>
+          </form>
+        </div>
+
+        <!-- MODULE 5: PORTFOLIO & TESTIMONIALS MANAGER -->
+        <div id="adm-panel-portfolio" class="adm-panel hidden grid lg:grid-cols-2 gap-6">
+          <!-- Add Real Case Study -->
+          <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-4">
+            <h2 class="font-display font-bold text-lg text-white">Publish Real Client Case Study</h2>
+            <p class="text-xs text-slate-400">Only verified projects published here appear on the public portfolio.</p>
+            <form onsubmit="addCaseStudy(event)" class="space-y-3">
+              <input type="text" id="cs-title" required placeholder="Project Title (e.g., B2B SaaS Lead Funnel Architecture)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+              <div class="grid grid-cols-2 gap-3">
+                <input type="text" id="cs-client" required placeholder="Client / Business Name" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+                <input type="text" id="cs-industry" required placeholder="Industry (e.g., E-Commerce)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+              </div>
+              <input type="text" id="cs-service" required placeholder="Service Category (e.g., Meta Ads & CRO)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+              <textarea id="cs-overview" rows="2" required placeholder="Project Overview & Objectives" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm"></textarea>
+              <textarea id="cs-results" rows="2" required placeholder="Verified Strategy & Measurable Outcomes" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm"></textarea>
+              <button type="submit" class="w-full py-3 rounded-xl btn-luxury text-white font-bold text-sm">Publish Case Study</button>
+            </form>
+          </div>
+
+          <!-- Add & Approve Genuine Testimonial -->
+          <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-4">
+            <h2 class="font-display font-bold text-lg text-white">Approve Genuine Client Testimonial</h2>
+            <p class="text-xs text-slate-400">Testimonials remain hidden until explicitly approved by the administrator.</p>
+            <form onsubmit="addTestimonial(event)" class="space-y-3">
+              <input type="text" id="tm-name" required placeholder="Client Full Name" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+              <input type="text" id="tm-role" required placeholder="Role & Company (e.g., Founder, Apex Retail)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+              <textarea id="tm-content" rows="3" required placeholder="Client feedback quote..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm"></textarea>
+              <button type="submit" class="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-sm transition">Approve & Publish Testimonial</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- APPLICATION LOGIC, 3D WEBGL SCENE & STATE ENGINE                      -->
+  <!-- ===================================================================== -->
+  <script>
+    // -----------------------------------------------------------------------
+    // 1. DATA & STATE INITIALIZATION (Zero Invented Contact Info or Fake Stats)
+    // -----------------------------------------------------------------------
+    const SERVICES_DATA = [
+      { title: 'Facebook Ads', icon: 'megaphone', desc: 'Full-funnel Meta advertising engineered for qualified leads, retargeting sequences, and scalable ROAS.' },
+      { title: 'Instagram Ads', icon: 'instagram', desc: 'High-converting Reels, Stories, and feed campaigns tailored for visual brand discovery and conversions.' },
+      { title: 'Google Ads', icon: 'search-check', desc: 'High-intent Search, Performance Max, and Display campaigns with precision keyword & bid governance.' },
+      { title: 'Social Media Marketing', icon: 'share-2', desc: 'Audience-centric growth campaigns designed to build brand authority, engagement, and buyer demand.' },
+      { title: 'Social Media Management', icon: 'calendar-check', desc: 'End-to-end content calendars, brand positioning, and active multi-platform community stewardship.' },
+      { title: 'Search Engine Optimization', icon: 'trending-up', desc: 'Holistic organic search architecture built for sustainable rankings and compounding inbound traffic.' },
+      { title: 'Technical SEO', icon: 'cpu', desc: 'Crawl budget optimization, Core Web Vitals, structured Schema.org markup, and indexation engineering.' },
+      { title: 'On-Page SEO', icon: 'file-text', desc: 'Semantic keyword mapping, content depth optimization, internal link equity, and metadata tuning.' },
+      { title: 'Off-Page SEO', icon: 'link-2', desc: 'Authoritative digital PR, ethical backlink acquisition, and brand entity trust signals.' },
+      { title: 'YouTube SEO', icon: 'play-circle', desc: 'Video search keyword research, click-through metadata, and audience retention optimization.' },
+      { title: 'Lead Generation', icon: 'filter', desc: 'B2B and B2C multi-channel lead capture funnels integrated with instant qualification workflows.' },
+      { title: 'TikTok Ads', icon: 'video', desc: 'Native short-form creative testing and rapid audience scaling for modern consumer brands.' },
+      { title: 'Conversion Rate Optimization', icon: 'mouse-pointer-click', desc: 'Landing page diagnostics, A/B testing, and funnel friction removal to maximize visitor-to-lead rate.' },
+      { title: 'Digital Marketing Strategy', icon: 'compass', desc: 'Custom multi-channel growth roadmaps aligning marketing spend directly with revenue milestones.' },
+      { title: 'Promotional Campaign Management', icon: 'rocket', desc: 'End-to-end execution of product launches, seasonal promotions, and high-impact brand activations.' }
+    ];
+
+    const SKILLS_DATA = [
+      { name: 'Meta Ads', pct: 95, tools: ['Meta Ads Manager', 'Conversions API', 'Pixel Telemetry'] },
+      { name: 'Google Ads', pct: 94, tools: ['Search & PMax', 'Google Tag Manager', 'Keyword Planner'] },
+      { name: 'SEO', pct: 93, tools: ['Search Console', 'Ahrefs', 'Screaming Frog'] },
+      { name: 'Social Media Marketing', pct: 92, tools: ['Meta Business Suite', 'LinkedIn Ads', 'TikTok Business'] },
+      { name: 'Lead Generation', pct: 95, tools: ['High-Converting Funnels', 'Lead Forms', 'CRM Routing'] },
+      { name: 'Analytics', pct: 91, tools: ['GA4', 'Looker Studio', 'UTM Attribution'] },
+      { name: 'Campaign Optimization', pct: 94, tools: ['A/B Creative Testing', 'Bid Scaling', 'CPA Reduction'] },
+      { name: 'Marketing Strategy', pct: 93, tools: ['Full-Funnel Architecture', 'ICP Research', 'Media Planning'] }
+    ];
+
+    const FAQ_DATA = [
+      { q: 'Which industries and business sectors do you work with?', a: 'As an All-Sector Digital Marketing Specialist, I build tailored acquisition systems for B2B services, SaaS, e-commerce, real estate, healthcare, education, and local or international enterprises.' },
+      { q: 'How are digital marketing pricing and retainers structured?', a: 'Engagements are customized based on campaign scope, ad spend management volume, and required channels—available as monthly growth retainers or dedicated project milestones.' },
+      { q: 'How long does it take to see measurable results from campaigns?', a: 'Paid advertising (Meta, Google, TikTok Ads) begins generating traffic and lead data within days of launch, while Technical and On-Page SEO compound steadily over 60–180 days.' },
+      { q: 'How do communication and performance reporting work?', a: 'Clients receive transparent weekly KPI breakdowns covering spend, impressions, click-through rates, qualified leads, and conversion attribution, alongside scheduled strategy check-ins.' },
+      { q: 'Can I book a free consultation before starting a project?', a: 'Yes. Select the "Free Consultation" tab in the Hire Me section below to share your website and goals for an initial diagnostic review.' }
+    ];
+    // Application State (Admin Password = 'admin', Motion Level = 'MAX')
+    const appState = {
+      adminAuthenticated: false,
+      adminPassword: 'admin',
+      motionLevel: 'MAX',
+      enable3D: true,
+      contacts: {
+        email: '',
+        whatsapp: '',
+        phone: '',
+        location: '',
+        availability: '',
+        preferred: 'WhatsApp',
+        socials: {
+          facebookProfile: '',
+          facebookPage: '',
+          linkedin: '',
+          instagram: '',
+          youtube: '',
+          freelancer: ''
+        }
+      },
+      leads: [],
+      projects: [],
+      testimonials: []
+    };
+
+    // -----------------------------------------------------------------------
+    // 2. TOAST NOTIFICATION HELPER (Never uses alert())
+    // -----------------------------------------------------------------------
+    function showToast(title, message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const colors = {
+        success: 'border-emerald-500/50 bg-emerald-950/90 text-emerald-200',
+        error: 'border-rose-500/50 bg-rose-950/90 text-rose-200',
+        info: 'border-cyan-500/50 bg-slate-900/95 text-cyan-200'
+      };
+      const el = document.createElement('div');
+      el.className = `pointer-events-auto p-4 rounded-2xl border backdrop-blur-xl shadow-2xl transition-all duration-300 ${colors[type] || colors.info}`;
+      el.innerHTML = `<div class="font-bold text-xs uppercase tracking-wider">${title}</div><div class="text-xs mt-1 opacity-90">${message}</div>`;
+      container.appendChild(el);
+      setTimeout(() => {
+        el.style.opacity = '0';
+        setTimeout(() => el.remove(), 300);
+      }, 4200);
+    }
+
+    // -----------------------------------------------------------------------
+    // 3. RENDER PUBLIC SECTIONS & DYNAMIC CONTACT SYSTEM
+    // -----------------------------------------------------------------------
+    function renderServices() {
+      const grid = document.getElementById('services-grid');
+      const select = document.getElementById('lead-requiredService');
+
+      grid.innerHTML = SERVICES_DATA.map((srv) => `
+        <div class="glass-card rounded-3xl p-6 flex flex-col justify-between space-y-5 group">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600/25 to-purple-600/25 border border-indigo-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition">
+              <i data-lucide="${srv.icon}" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-white group-hover:text-cyan-300 transition">${srv.title}</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">${srv.desc}</p>
+          </div>
+          <a href="#contact" onclick="inquireService('${srv.title}')" class="inline-flex items-center gap-2 text-xs font-semibold text-cyan-400 hover:text-cyan-300 pt-2 border-t border-slate-800/80">
+            <span>Inquire About ${srv.title}</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      `).join('');
+
+      select.innerHTML = SERVICES_DATA.map((s) => `<option value="${s.title}">${s.title}</option>`).join('');
+    }
+
+    function renderSkills() {
+      const container = document.getElementById('skills-list');
+      container.innerHTML = SKILLS_DATA.map((sk) => `
+        <div class="p-4 rounded-2xl bg-slate-950/65 border border-slate-800/90 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sm text-white">${sk.name}</span>
+            <span class="text-xs font-semibold text-cyan-400">${sk.pct}%</span>
+          </div>
+          <div class="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+            <div class="h-full rounded-full btn-luxury" style="width: ${sk.pct}%"></div>
+          </div>
+          <div class="flex flex-wrap gap-1.5 pt-1">
+            ${sk.tools.map((t) => `<span class="px-2 py-0.5 rounded-md bg-slate-900 text-[10px] text-slate-400 border border-slate-800">${t}</span>`).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderFaqs() {
+      const container = document.getElementById('faq-accordion');
+      container.innerHTML = FAQ_DATA.map((item, idx) => `
+        <div class="glass-card rounded-2xl overflow-hidden">
+          <button type="button" onclick="toggleFaq(${idx})" class="w-full px-6 py-4 text-left flex items-center justify-between gap-4">
+            <span class="font-semibold text-sm sm:text-base text-white">${item.q}</span>
+            <i data-lucide="chevron-down" id="faq-icon-${idx}" class="w-5 h-5 text-cyan-400 transition-transform duration-300 shrink-0"></i>
+          </button>
+          <div id="faq-body-${idx}" class="hidden px-6 pb-5 text-sm text-slate-300 leading-relaxed border-t border-slate-800/70 pt-3">
+            ${item.a}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function toggleFaq(idx) {
+      const body = document.getElementById(`faq-body-${idx}`);
+      const icon = document.getElementById(`faq-icon-${idx}`);
+      body.classList.toggle('hidden');
+      icon.classList.toggle('rotate-180');
+    }
+
+    function renderPortfolio() {
+      const container = document.getElementById('portfolio-container');
+      document.getElementById('stat-projects-count').textContent = appState.projects.length;
+
+      if (appState.projects.length === 0) {
+        container.innerHTML = `
+          <div class="glass-card rounded-3xl p-8 sm:p-12 text-center max-w-2xl mx-auto space-y-4 border-dashed border-slate-700">
+            <div class="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-800 mx-auto flex items-center justify-center text-cyan-400">
+              <i data-lucide="folder-open" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-white">No Public Case Studies Published Yet</h3>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              In compliance with strict data authenticity standards, no fabricated projects or invented campaign metrics are displayed. Use the <strong>Admin CMS Demo</strong> to publish real client case studies.
+            </p>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <div class="grid md:grid-cols-2 gap-6">
+            ${appState.projects.map((p) => `
+              <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-semibold">${p.service}</span>
+                  <span class="text-xs text-slate-400">${p.industry} • ${p.client}</span>
+                </div>
+                <h3 class="font-display font-bold text-xl text-white">${p.title}</h3>
+                <p class="text-sm text-slate-300 leading-relaxed">${p.overview}</p>
+                <div class="p-4 rounded-2xl bg-slate-950/70 border border-emerald-500/30">
+                  <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-400">Strategy & Verified Outcomes</div>
+                  <p class="text-xs sm:text-sm text-slate-200 mt-1">${p.results}</p>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+      lucide.createIcons();
+    }
+
+    function renderTestimonials() {
+      const container = document.getElementById('testimonials-container');
+      if (appState.testimonials.length === 0) {
+        container.innerHTML = `
+          <div class="glass-card rounded-3xl p-8 text-center max-w-2xl mx-auto space-y-3 border-dashed border-slate-700">
+            <p class="text-sm text-slate-300 font-medium">Awaiting Admin-Approved Client Testimonials</p>
+            <p class="text-xs text-slate-400">Only genuine testimonials verified and approved inside the Admin Dashboard render in this slider.</p>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            ${appState.testimonials.map((t) => `
+              <div class="glass-card rounded-3xl p-6 space-y-4">
+                <div class="flex items-center gap-1 text-amber-400 text-xs">★★★★★</div>
+                <p class="text-sm text-slate-200 italic leading-relaxed">"${t.content}"</p>
+                <div class="pt-3 border-t border-slate-800">
+                  <div class="font-bold text-sm text-white">${t.name}</div>
+                  <div class="text-xs text-cyan-400">${t.role}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+    }
+
+    // Dynamic Contact Synchronization Across All 6 UI Touchpoints
+    function syncContactUI() {
+      const c = appState.contacts;
+      const cleanWa = c.whatsapp.replace(/[^\d]/g, '');
+      const waUrl = cleanWa ? `https://wa.me/${cleanWa}?text=${encodeURIComponent('Hello Mohammad Jamal Uddin Nizami, I would like to discuss a digital marketing project.')}` : '';
+      const mailUrl = c.email ? `mailto:${c.email}` : '';
+      const telUrl = c.phone ? `tel:${c.phone.replace(/[^\d+]/g, '')}` : '';
+
+      // Count active fields for Admin Overview
+      let activeCount = 0;
+      if (c.email) activeCount++;
+      if (cleanWa) activeCount++;
+      if (c.phone) activeCount++;
+      if (c.location) activeCount++;
+      Object.values(c.socials).forEach((v) => { if (v) activeCount++; });
+      document.getElementById('stat-contacts-count').textContent = activeCount;
+
+      // 1. Header Dynamic Contact Pill
+      const headerEl = document.getElementById('header-dynamic-contact');
+      headerEl.innerHTML = waUrl
+        ? `<a href="${waUrl}" target="_blank" rel="noopener" class="px-3.5 py-2 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-xs font-semibold hover:bg-emerald-500/25 transition flex items-center gap-1.5"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i><span>WhatsApp</span></a>`
+        : '';
+
+      // 2. Hero Dynamic Contact Buttons + Availability Badge
+      const heroContactsEl = document.getElementById('hero-dynamic-contacts');
+      const badges = [];
+      if (waUrl) badges.push(`<a href="${waUrl}" target="_blank" rel="noopener" class="px-4 py-2 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-xs font-semibold hover:bg-emerald-500/25 transition flex items-center gap-2"><i data-lucide="message-circle" class="w-4 h-4"></i><span>WhatsApp Direct</span></a>`);
+      if (mailUrl) badges.push(`<a href="${mailUrl}" class="px-4 py-2 rounded-xl bg-blue-500/15 border border-blue-500/40 text-blue-300 text-xs font-semibold hover:bg-blue-500/25 transition flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i><span>${c.email}</span></a>`);
+      heroContactsEl.innerHTML = badges.join('');
+
+      const availBadge = document.getElementById('hero-availability-badge');
+      if (c.availability) {
+        availBadge.textContent = c.availability;
+        availBadge.classList.remove('hidden');
+      } else {
+        availBadge.classList.add('hidden');
+      }
+
+      // 3. Dedicated Contact Section Cards & Socials
+      const contactCardsEl = document.getElementById('contact-section-dynamic-cards');
+      const cards = [];
+      if (mailUrl) cards.push(`<a href="${mailUrl}" class="glass-card rounded-2xl p-4 flex items-center gap-3.5 hover:border-cyan-400"><div class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center"><i data-lucide="mail" class="w-5 h-5"></i></div><div><div class="text-[11px] text-slate-400">Professional Email</div><div class="text-sm font-semibold text-white">${c.email}</div></div></a>`);
+      if (waUrl) cards.push(`<a href="${waUrl}" target="_blank" rel="noopener" class="glass-card rounded-2xl p-4 flex items-center gap-3.5 hover:border-emerald-400"><div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center"><i data-lucide="message-circle" class="w-5 h-5"></i></div><div><div class="text-[11px] text-slate-400">WhatsApp Business</div><div class="text-sm font-semibold text-white">+${cleanWa}</div></div></a>`);
+      if (telUrl) cards.push(`<a href="${telUrl}" class="glass-card rounded-2xl p-4 flex items-center gap-3.5 hover:border-purple-400"><div class="w-10 h-10 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center"><i data-lucide="phone" class="w-5 h-5"></i></div><div><div class="text-[11px] text-slate-400">Direct Phone</div><div class="text-sm font-semibold text-white">${c.phone}</div></div></a>`);
+      if (c.location) cards.push(`<div class="glass-card rounded-2xl p-4 flex items-center gap-3.5"><div class="w-10 h-10 rounded-xl bg-cyan-500/15 text-cyan-400 flex items-center justify-center"><i data-lucide="map-pin" class="w-5 h-5"></i></div><div><div class="text-[11px] text-slate-400">Business Location</div><div class="text-sm font-semibold text-white">${c.location}</div></div></div>`);
+
+      if (cards.length === 0) {
+        contactCardsEl.innerHTML = `
+          <div class="p-4 rounded-2xl border border-dashed border-slate-700 bg-slate-900/40 text-xs text-slate-400 leading-relaxed">
+            Direct email, WhatsApp, and social profile badges are currently hidden because no personal contact details have been configured yet. Open <strong>Admin CMS Demo → Contact & Social Links</strong> to populate and publish them live.
+          </div>
+        `;
+      } else {
+        contactCardsEl.innerHTML = cards.join('');
+      }
+
+      // Social Links
+      const socialMap = [
+        { key: 'facebookProfile', label: 'Facebook Profile' },
+        { key: 'facebookPage', label: 'Facebook Page' },
+        { key: 'linkedin', label: 'LinkedIn' },
+        { key: 'instagram', label: 'Instagram' },
+        { key: 'youtube', label: 'YouTube' },
+        { key: 'freelancer', label: 'Freelancer' }
+      ];
+      const activeSocials = socialMap.filter((s) => c.socials[s.key]);
+      const socialsEl = document.getElementById('contact-section-socials');
+      socialsEl.innerHTML = activeSocials.length > 0
+        ? `<div class="text-xs font-semibold text-slate-400 mb-2">Verified Profiles</div><div class="flex flex-wrap gap-2">${activeSocials.map((s) => `<a href="${c.socials[s.key]}" target="_blank" rel="noopener" class="px-3.5 py-2 rounded-xl glass-card text-xs font-semibold text-cyan-300 hover:text-white">${s.label} ↗</a>`).join('')}</div>`
+        : '';
+
+      // 4. Footer & 5. Mobile Nav
+      document.getElementById('footer-dynamic-contacts').innerHTML = badges.join('');
+      document.getElementById('mobile-dynamic-contact').innerHTML = badges.join('');
+
+      // 6. Floating Contact Widget
+      const floatEl = document.getElementById('floating-contact-widget');
+      if (waUrl || mailUrl) {
+        floatEl.classList.remove('hidden');
+        floatEl.innerHTML = `
+          ${waUrl ? `<a href="${waUrl}" target="_blank" rel="noopener" title="Chat on WhatsApp" class="w-13 h-13 p-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white shadow-xl shadow-emerald-600/30 transition flex items-center justify-center"><i data-lucide="message-circle" class="w-6 h-6"></i></a>` : ''}
+          ${mailUrl ? `<a href="${mailUrl}" title="Send Email" class="w-13 h-13 p-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white shadow-xl shadow-indigo-600/30 transition flex items-center justify-center"><i data-lucide="mail" class="w-6 h-6"></i></a>` : ''}
+        `;
+      } else {
+        floatEl.classList.add('hidden');
+      }
+
+      lucide.createIcons();
+    }
+
+    // -----------------------------------------------------------------------
+    // 4. CLIENT ACQUISITION & LEAD FORM HANDLERS
+    // -----------------------------------------------------------------------
+    function selectInquiryTab(type) {
+      document.getElementById('form-inquiry-type').value = type;
+      document.querySelectorAll('.inquiry-tab').forEach((btn) => {
+        btn.classList.remove('bg-indigo-600', 'text-white');
+        btn.classList.add('text-slate-400');
+      });
+      const activeBtn = document.getElementById(`tab-${type}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-indigo-600', 'text-white');
+        activeBtn.classList.remove('text-slate-400');
+      }
+      const labels = {
+        PROJECT_INQUIRY: 'Submit Project Inquiry',
+        QUOTATION: 'Request Custom Quotation',
+        FREE_CONSULTATION: 'Book Free Strategy Consultation'
+      };
+      document.getElementById('submit-btn-text').textContent = labels[type] || 'Submit Inquiry';
+    }
+
+    function inquireService(serviceTitle) {
+      selectInquiryTab('PROJECT_INQUIRY');
+      const select = document.getElementById('lead-requiredService');
+      select.value = serviceTitle;
+      showToast('Service Selected', `Pre-selected "${serviceTitle}" in the inquiry form.`, 'info');
+    }
+
+    function handleLeadSubmit(e) {
+      e.preventDefault();
+      if (document.getElementById('form-honeypot').value) return;
+
+      const lead = {
+        id: 'LD-' + Math.floor(1000 + Math.random() * 9000),
+        type: document.getElementById('form-inquiry-type').value,
+        fullName: document.getElementById('lead-fullName').value.trim(),
+        businessEmail: document.getElementById('lead-businessEmail').value.trim(),
+        phoneWhatsapp: document.getElementById('lead-phoneWhatsapp').value.trim(),
+        country: document.getElementById('lead-country').value.trim(),
+        companyName: document.getElementById('lead-companyName').value.trim(),
+        websiteUrl: document.getElementById('lead-websiteUrl').value.trim(),
+        requiredService: document.getElementById('lead-requiredService').value,
+        monthlyBudget: document.getElementById('lead-monthlyBudget').value,
+        preferredContact: document.getElementById('lead-preferredContact').value,
+        projectDetails: document.getElementById('lead-projectDetails').value.trim(),
+        status: 'NEW',
+        createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+
+      appState.leads.unshift(lead);
+      renderAdminLeads();
+      e.target.reset();
+      showToast('Inquiry Saved to Database', `Lead ${lead.id} (${lead.requiredService}) logged into the Admin Lead Management dashboard.`, 'success');
+    }
+
+    // -----------------------------------------------------------------------
+    // 5. ADMIN AUTHENTICATION & CMS CONTROLS
+    // -----------------------------------------------------------------------
+    function toggleAdminView() {
+      const pub = document.getElementById('public-portfolio-view');
+      const adm = document.getElementById('admin-dashboard-view');
+      const label = document.getElementById('view-toggle-label');
+      if (adm.classList.contains('hidden')) {
+        pub.classList.add('hidden');
+        adm.classList.remove('hidden');
+        label.textContent = 'Back to Public Site';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        adm.classList.add('hidden');
+        pub.classList.remove('hidden');
+        label.textContent = 'Admin CMS Demo';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function switchView(mode) {
+      if (mode === 'public') {
+        document.getElementById('admin-dashboard-view').classList.add('hidden');
+        document.getElementById('public-portfolio-view').classList.remove('hidden');
+        document.getElementById('view-toggle-label').textContent = 'Admin CMS Demo';
+      }
+    }
+
+    function openAdminModule(tabName) {
+      toggleAdminView();
+      if (appState.adminAuthenticated && !appState.mustChangePassword) {
+        setAdminTab(tabName);
+      }
+    }
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const pwd = document.getElementById('admin-login-password').value;
+      if (pwd === appState.adminPassword) {
+        appState.adminAuthenticated = true;
+        document.getElementById('admin-login-box').classList.add('hidden');
+        document.getElementById('admin-cms-workspace').classList.remove('hidden');
+        showToast('Admin Authenticated', 'Welcome to the Website Command Center.', 'success');
+      } else {
+        showToast('Authentication Failed', `Invalid password. Current admin password is "${appState.adminPassword}".`, 'error');
+      }
+    }
+
+    function handleAdminLogout() {
+      appState.adminAuthenticated = false;
+      document.getElementById('admin-cms-workspace').classList.add('hidden');
+      document.getElementById('admin-login-box').classList.remove('hidden');
+      showToast('Session Terminated', 'Admin session closed securely.', 'info');
+    }
+
+    function setAdminTab(tabName) {
+      document.querySelectorAll('.adm-panel').forEach((p) => p.classList.add('hidden'));
+      document.getElementById(`adm-panel-${tabName}`).classList.remove('hidden');
+
+      document.querySelectorAll('.adm-nav-btn').forEach((b) => {
+        b.classList.remove('bg-indigo-600', 'text-white');
+        b.classList.add('glass-card', 'text-slate-300');
+      });
+      const active = document.getElementById(`adm-tab-${tabName}`);
+      active.classList.add('bg-indigo-600', 'text-white');
+      active.classList.remove('glass-card', 'text-slate-300');
+    }
+
+    function saveContactSettings(e) {
+      e.preventDefault();
+      appState.contacts.email = document.getElementById('cfg-email').value.trim();
+      appState.contacts.whatsapp = document.getElementById('cfg-whatsapp').value.trim();
+      appState.contacts.phone = document.getElementById('cfg-phone').value.trim();
+      appState.contacts.location = document.getElementById('cfg-location').value.trim();
+      appState.contacts.availability = document.getElementById('cfg-availability').value.trim();
+      appState.contacts.preferred = document.getElementById('cfg-preferred').value;
+      appState.contacts.socials.facebookProfile = document.getElementById('cfg-fb-profile').value.trim();
+      appState.contacts.socials.facebookPage = document.getElementById('cfg-fb-page').value.trim();
+      appState.contacts.socials.linkedin = document.getElementById('cfg-linkedin').value.trim();
+      appState.contacts.socials.instagram = document.getElementById('cfg-instagram').value.trim();
+      appState.contacts.socials.youtube = document.getElementById('cfg-youtube').value.trim();
+      appState.contacts.socials.freelancer = document.getElementById('cfg-freelancer').value.trim();
+
+      syncContactUI();
+      showToast('Contact Settings Published', 'Header, Hero, Contact Section, Footer & Floating Widget updated live.', 'success');
+    }
+
+    function clearAllContactSettings() {
+      ['cfg-email', 'cfg-whatsapp', 'cfg-phone', 'cfg-location', 'cfg-availability', 'cfg-fb-profile', 'cfg-fb-page', 'cfg-linkedin', 'cfg-instagram', 'cfg-youtube', 'cfg-freelancer'].forEach((id) => {
+        document.getElementById(id).value = '';
+      });
+      appState.contacts = {
+        email: '', whatsapp: '', phone: '', location: '', availability: '', preferred: 'WhatsApp',
+        socials: { facebookProfile: '', facebookPage: '', linkedin: '', instagram: '', youtube: '', freelancer: '' }
+      };
+      syncContactUI();
+      showToast('Contacts Cleared', 'All empty contact elements are now automatically hidden on the public site.', 'info');
+    }
+
+    function renderAdminLeads() {
+      document.getElementById('admin-lead-badge').textContent = appState.leads.length;
+      document.getElementById('stat-leads-count').textContent = appState.leads.length;
+      const container = document.getElementById('admin-leads-table-container');
+
+      if (appState.leads.length === 0) {
+        container.innerHTML = `<p class="text-sm text-slate-400 py-6 text-center">No leads submitted yet. Submit an inquiry on the public website to test live lead capture.</p>`;
+        return;
+      }
+
+      container.innerHTML = `
+        <table class="w-full text-left text-xs">
+          <thead class="border-b border-slate-800 text-slate-400 uppercase">
+            <tr>
+              <th class="py-3 px-3">ID / Type</th>
+              <th class="py-3 px-3">Client</th>
+              <th class="py-3 px-3">Service & Budget</th>
+              <th class="py-3 px-3">Contact</th>
+              <th class="py-3 px-3">Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/70 text-slate-200">
+            ${appState.leads.map((l, idx) => `
+              <tr>
+                <td class="py-3 px-3 font-mono text-cyan-400">${l.id}<div class="text-[10px] text-slate-400">${l.type}</div></td>
+                <td class="py-3 px-3"><div class="font-bold text-white">${l.fullName}</div><div class="text-slate-400">${l.companyName || l.country}</div></td>
+                <td class="py-3 px-3"><div class="font-semibold text-indigo-300">${l.requiredService}</div><div class="text-slate-400">${l.monthlyBudget}</div></td>
+                <td class="py-3 px-3"><div>${l.businessEmail}</div><div class="text-emerald-400">${l.phoneWhatsapp} (${l.preferredContact})</div></td>
+                <td class="py-3 px-3">
+                  <select onchange="updateLeadStatus(${idx}, this.value)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-white text-xs">
+                    <option value="NEW" ${l.status === 'NEW' ? 'selected' : ''}>NEW</option>
+                    <option value="CONTACTED" ${l.status === 'CONTACTED' ? 'selected' : ''}>CONTACTED</option>
+                    <option value="QUALIFIED" ${l.status === 'QUALIFIED' ? 'selected' : ''}>QUALIFIED</option>
+                    <option value="WON" ${l.status === 'WON' ? 'selected' : ''}>WON</option>
+                  </select>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function updateLeadStatus(idx, status) {
+      appState.leads[idx].status = status;
+      showToast('Lead Status Updated', `Lead ${appState.leads[idx].id} marked as ${status}.`, 'success');
+    }
+
+    function saveHeroSettings(e) {
+      e.preventDefault();
+      const headline = document.getElementById('edit-hero-headline').value.trim();
+      const img = document.getElementById('edit-hero-image').value.trim();
+      const enable3D = document.getElementById('edit-enable-3d').checked;
+      const motionVal = document.getElementById('edit-motion-level').value;
+      const newPass = document.getElementById('edit-admin-password').value.trim();
+
+      if (headline) document.getElementById('hero-headline').textContent = `"${headline}"`;
+      if (img) document.getElementById('hero-profile-img').src = img;
+      if (newPass) appState.adminPassword = newPass;
+
+      appState.enable3D = enable3D;
+      appState.motionLevel = motionVal;
+      document.getElementById('motion-level-text').textContent = motionVal;
+      document.getElementById('global-3d-canvas').style.display = enable3D ? 'block' : 'none';
+      showToast('Settings Applied', `Motion set to ${motionVal} and live site updated.`, 'success');
+    }
+
+    function cycleMotionIntensity() {
+      const order = ['MAX', 'HIGH', 'LOW'];
+      const next = order[(order.indexOf(appState.motionLevel) + 1) % order.length];
+      appState.motionLevel = next;
+      document.getElementById('motion-level-text').textContent = next;
+      const select = document.getElementById('edit-motion-level');
+      if (select) select.value = next;
+      showToast('Motion Intensity Updated', `3D & Cursor Animation level switched to ${next}.`, 'info');
+    }
+
+    function addCaseStudy(e) {
+      e.preventDefault();
+      appState.projects.unshift({
+        title: document.getElementById('cs-title').value.trim(),
+        client: document.getElementById('cs-client').value.trim(),
+        industry: document.getElementById('cs-industry').value.trim(),
+        service: document.getElementById('cs-service').value.trim(),
+        overview: document.getElementById('cs-overview').value.trim(),
+        results: document.getElementById('cs-results').value.trim()
+      });
+      renderPortfolio();
+      e.target.reset();
+      showToast('Case Study Published', 'Now visible in the public Portfolio section.', 'success');
+    }
+
+    function addTestimonial(e) {
+      e.preventDefault();
+      appState.testimonials.unshift({
+        name: document.getElementById('tm-name').value.trim(),
+        role: document.getElementById('tm-role').value.trim(),
+        content: document.getElementById('tm-content').value.trim()
+      });
+      renderTestimonials();
+      e.target.reset();
+      showToast('Testimonial Approved', 'Now live in the public Client Testimonials section.', 'success');
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobile-nav-drawer').classList.toggle('hidden');
+    }
+    function closeMobileMenu() {
+      document.getElementById('mobile-nav-drawer').classList.add('hidden');
+    }
+
+    // -----------------------------------------------------------------------
+    // 6. THREE.JS INTERACTIVE 3D HERO GEOMETRY
+    // -----------------------------------------------------------------------
+    function initThreeHero() {
+      const container = document.getElementById('hero-canvas-container');
+      if (!container || typeof THREE === 'undefined') return;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+      camera.position.z = 7;
+
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer.domElement);
+
+      // Central Metallic Icosahedron
+      const icoGeo = new THREE.IcosahedronGeometry(1.75, 1);
+      const icoMat = new THREE.MeshStandardMaterial({
+        color: 0x312e81,
+        emissive: 0x4f46e5,
+        emissiveIntensity: 0.45,
+        metalness: 0.85,
+        roughness: 0.2,
+        wireframe: false
+      });
+      const icosahedron = new THREE.Mesh(icoGeo, icoMat);
+      icosahedron.position.x = 2.1;
+      scene.add(icosahedron);
+
+      // Outer Electric Cyan Wireframe Cage
+      const wireGeo = new THREE.IcosahedronGeometry(2.05, 1);
+      const wireMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true, transparent: true, opacity: 0.35 });
+      const wireMesh = new THREE.Mesh(wireGeo, wireMat);
+      wireMesh.position.x = 2.1;
+      scene.add(wireMesh);
+
+      // Glowing Orbital Torus Ring
+      const torusGeo = new THREE.TorusGeometry(2.75, 0.03, 16, 100);
+      const torusMat = new THREE.MeshBasicMaterial({ color: 0xe879f9 });
+      const torus = new THREE.Mesh(torusGeo, torusMat);
+      torus.position.x = 2.1;
+      torus.rotation.x = 1.1;
+      scene.add(torus);
+
+      // Floating Particle Field
+      const particlesGeo = new THREE.BufferGeometry();
+      const count = 240;
+      const positions = new Float32Array(count * 3);
+      for (let i = 0; i < count * 3; i++) {
+        positions[i] = (Math.random() - 0.5) * 16;
+      }
+      particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      const particlesMat = new THREE.PointsMaterial({ color: 0x38bdf8, size: 0.04, transparent: true, opacity: 0.7 });
+      const particles = new THREE.Points(particlesGeo, particlesMat);
+      scene.add(particles);
+
+      // Dynamic Lighting
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+      scene.add(ambientLight);
+
+      const blueLight = new THREE.PointLight(0x3b82f6, 3, 20);
+      blueLight.position.set(5, 5, 5);
+      scene.add(blueLight);
+
+      const magentaLight = new THREE.PointLight(0xec4899, 2.5, 20);
+      magentaLight.position.set(-5, -3, 4);
+      scene.add(magentaLight);
+
+      // Mouse Parallax Tracking
+      let targetX = 0;
+      let targetY = 0;
+      window.addEventListener('mousemove', (event) => {
+        targetX = (event.clientX / window.innerWidth - 0.5) * 1.4;
+        targetY = (event.clientY / window.innerHeight - 0.5) * 1.4;
+      });
+
+      window.addEventListener('resize', () => {
+        if (!container.clientWidth || !container.clientHeight) return;
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        icosahedron.rotation.y += 0.004;
+        icosahedron.rotation.x += 0.002;
+        wireMesh.rotation.y -= 0.003;
+        wireMesh.rotation.z += 0.002;
+        torus.rotation.z += 0.006;
+        particles.rotation.y += 0.0008;
+
+        // Smooth mouse-responsive camera & object tilt
+        icosahedron.rotation.y += (targetX - icosahedron.rotation.y) * 0.03;
+        icosahedron.rotation.x += (targetY - icosahedron.rotation.x) * 0.03;
+        wireMesh.rotation.y = icosahedron.rotation.y * 1.1;
+
+        renderer.render(scene, camera);
+      }
+      animate();
+    }
+
+    // -----------------------------------------------------------------------
+    // 7. BOOTSTRAP ON WINDOW LOAD
+    // -----------------------------------------------------------------------
+    // 6. FULL-VIEWPORT MAX-MOTION THREE.JS 3D UNIVERSE + MOUSE FX
+    // -----------------------------------------------------------------------
+    function initGlobal3DUniverse() {
+      const container = document.getElementById('global-3d-canvas');
+      if (!container || typeof THREE === 'undefined') return;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 8.5;
+
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer.domElement);
+
+      // Master group that follows mouse anywhere on screen
+      const universeGroup = new THREE.Group();
+      scene.add(universeGroup);
+
+      // 1. Primary Metallic Crystal Core
+      const icoGeo = new THREE.IcosahedronGeometry(1.75, 1);
+      const icoMat = new THREE.MeshStandardMaterial({
+        color: 0x312e81,
+        emissive: 0x6366f1,
+        emissiveIntensity: 0.55,
+        metalness: 0.9,
+        roughness: 0.15
+      });
+      const coreMesh = new THREE.Mesh(icoGeo, icoMat);
+      coreMesh.position.set(2.4, 0.3, 0);
+      universeGroup.add(coreMesh);
+
+      // 2. Electric Cyan Geodesic Wireframe Shell
+      const wireGeo = new THREE.IcosahedronGeometry(2.15, 1);
+      const wireMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true, transparent: true, opacity: 0.42 });
+      const wireMesh = new THREE.Mesh(wireGeo, wireMat);
+      wireMesh.position.copy(coreMesh.position);
+      universeGroup.add(wireMesh);
+
+      // 3. Dual Gyroscopic Neon Rings
+      const ring1 = new THREE.Mesh(
+        new THREE.TorusGeometry(2.85, 0.03, 16, 120),
+        new THREE.MeshBasicMaterial({ color: 0xe879f9 })
+      );
+      ring1.position.copy(coreMesh.position);
+      ring1.rotation.x = 1.15;
+      universeGroup.add(ring1);
+
+      const ring2 = new THREE.Mesh(
+        new THREE.TorusGeometry(3.25, 0.02, 16, 120),
+        new THREE.MeshBasicMaterial({ color: 0x06b6d4, transparent: true, opacity: 0.7 })
+      );
+      ring2.position.copy(coreMesh.position);
+      ring2.rotation.y = 0.95;
+      universeGroup.add(ring2);
+
+      // 4. Orbiting Floating Geometric Satellites Across Full Viewport
+      const satellites = [];
+      const satGeos = [
+        new THREE.OctahedronGeometry(0.32, 0),
+        new THREE.TetrahedronGeometry(0.35, 0),
+        new THREE.TorusKnotGeometry(0.24, 0.07, 64, 8)
+      ];
+      const satColors = [0x38bdf8, 0xc084fc, 0xf472b6, 0x818cf8];
+
+      for (let i = 0; i < 14; i++) {
+        const mesh = new THREE.Mesh(
+          satGeos[i % satGeos.length],
+          new THREE.MeshStandardMaterial({
+            color: satColors[i % satColors.length],
+            emissive: satColors[i % satColors.length],
+            emissiveIntensity: 0.45,
+            wireframe: i % 2 === 0
+          })
+        );
+        mesh.position.set(
+          (Math.random() - 0.5) * 14,
+          (Math.random() - 0.5) * 9,
+          (Math.random() - 0.5) * 5 - 1
+        );
+        mesh.userData = {
+          baseX: mesh.position.x,
+          baseY: mesh.position.y,
+          speed: 0.5 + Math.random() * 1.2,
+          phase: Math.random() * Math.PI * 2
+        };
+        universeGroup.add(mesh);
+        satellites.push(mesh);
+      }
+
+      // 5. Dense Multi-Color Interactive Stardust Field (900 Particles)
+      const particlesGeo = new THREE.BufferGeometry();
+      const count = 900;
+      const positions = new Float32Array(count * 3);
+      const colors = new Float32Array(count * 3);
+      const palette = [new THREE.Color(0x38bdf8), new THREE.Color(0xa855f7), new THREE.Color(0xec4899), new THREE.Color(0x6366f1)];
+
+      for (let i = 0; i < count; i++) {
+        positions[i * 3] = (Math.random() - 0.5) * 24;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 18;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 14;
+        const c = palette[i % palette.length];
+        colors[i * 3] = c.r;
+        colors[i * 3 + 1] = c.g;
+        colors[i * 3 + 2] = c.b;
+      }
+      particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      particlesGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      const particlesMat = new THREE.PointsMaterial({ size: 0.055, vertexColors: true, transparent: true, opacity: 0.85 });
+      const starField = new THREE.Points(particlesGeo, particlesMat);
+      scene.add(starField);
+
+      // 6. Dynamic Cursor-Tracking Point Light
+      const cursorLight = new THREE.PointLight(0x38bdf8, 4.5, 18);
+      cursorLight.position.set(0, 0, 4);
+      scene.add(cursorLight);
+
+      const magentaLight = new THREE.PointLight(0xd946ef, 3.2, 22);
+      magentaLight.position.set(-6, -4, 4);
+      scene.add(magentaLight);
+
+      scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+
+      // Mouse, Scroll & Click Shockwave Tracking Everywhere
+      let normX = 0;
+      let normY = 0;
+      let scrollRatio = 0;
+      let pulseBoost = 0;
+
+      const spotlight = document.getElementById('cursor-spotlight');
+      const cursorRing = document.getElementById('cursor-ring');
+
+      window.addEventListener('mousemove', (e) => {
+        normX = (e.clientX / window.innerWidth) * 2 - 1;
+        normY = -(e.clientY / window.innerHeight) * 2 + 1;
+
+        if (spotlight) {
+          spotlight.style.left = e.clientX + 'px';
+          spotlight.style.top = e.clientY + 'px';
+        }
+        if (cursorRing) {
+          cursorRing.style.left = e.clientX + 'px';
+          cursorRing.style.top = e.clientY + 'px';
+        }
+      });
+
+      window.addEventListener('scroll', () => {
+        const maxScroll = Math.max(1, document.body.scrollHeight - window.innerHeight);
+        scrollRatio = window.scrollY / maxScroll;
+      }, { passive: true });
+
+      window.addEventListener('click', (e) => {
+        if (appState.motionLevel === 'LOW') return;
+        pulseBoost = 0.45;
+        const wave = document.createElement('div');
+        wave.className = 'click-shockwave';
+        wave.style.left = e.clientX + 'px';
+        wave.style.top = e.clientY + 'px';
+        document.body.appendChild(wave);
+        setTimeout(() => wave.remove(), 760);
+      });
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      const clock = new THREE.Clock();
+      function animate() {
+        requestAnimationFrame(animate);
+        if (!appState.enable3D) return;
+
+        const t = clock.getElapsedTime();
+        const mult = appState.motionLevel === 'MAX' ? 1.65 : appState.motionLevel === 'HIGH' ? 1.0 : 0.35;
+
+        // Decay click energy boost
+        pulseBoost *= 0.92;
+        const scalePulse = 1 + pulseBoost * mult;
+
+        // Core & Wireframe continuous + mouse-driven rotation
+        coreMesh.rotation.y += 0.008 * mult;
+        coreMesh.rotation.x += 0.005 * mult;
+        coreMesh.scale.setScalar(scalePulse);
+
+        wireMesh.rotation.y -= 0.006 * mult;
+        wireMesh.rotation.z += 0.004 * mult;
+        wireMesh.scale.setScalar(scalePulse * 1.02);
+
+        ring1.rotation.z += 0.014 * mult;
+        ring1.rotation.x = 1.15 + normY * 0.45 * mult;
+        ring2.rotation.y -= 0.012 * mult;
+        ring2.rotation.z = normX * 0.45 * mult;
+
+        // Move 3D light & universe smoothly toward cursor everywhere on page
+        cursorLight.position.x += (normX * 7 - cursorLight.position.x) * 0.08;
+        cursorLight.position.y += (normY * 5 - cursorLight.position.y) * 0.08;
+
+        universeGroup.rotation.y += (normX * 0.48 * mult - universeGroup.rotation.y) * 0.06;
+        universeGroup.rotation.x += (-normY * 0.36 * mult - universeGroup.rotation.x) * 0.06;
+        universeGroup.position.y = Math.sin(scrollRatio * Math.PI * 2) * 0.65 * mult;
+
+        // Animate floating satellites
+        satellites.forEach((sat) => {
+          const d = sat.userData;
+          sat.rotation.x += 0.015 * d.speed * mult;
+          sat.rotation.y += 0.018 * d.speed * mult;
+          sat.position.y = d.baseY + Math.sin(t * d.speed + d.phase) * 0.45 * mult;
+          sat.position.x = d.baseX + Math.cos(t * d.speed * 0.8 + d.phase) * 0.35 * mult;
+        });
+
+        starField.rotation.y = t * 0.03 * mult + normX * 0.25 * mult;
+        starField.rotation.x = scrollRatio * 0.8 * mult + normY * 0.2 * mult;
+
+        renderer.render(scene, camera);
+      }
+      animate();
+    }
+
+    // Interactive 3D Card Tilt, Specular Spotlight & Magnetic Buttons Everywhere
+    function initInteractiveCardAndButtonFX() {
+      const cursorRing = document.getElementById('cursor-ring');
+
+      document.addEventListener('mousemove', (e) => {
+        if (appState.motionLevel === 'LOW') return;
+
+        // 3D Tilt + Radial Sheen on any hovered .glass-card
+        const card = e.target.closest('.glass-card');
+        if (card) {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+
+          const tiltStrength = appState.motionLevel === 'MAX' ? 9 : 4.5;
+          const rotateY = ((x / rect.width) - 0.5) * tiltStrength;
+          const rotateX = -((y / rect.height) - 0.5) * tiltStrength;
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px)`;
+        }
+
+        // Magnetic pull on .magnetic-btn
+        const magBtn = e.target.closest('.magnetic-btn');
+        if (magBtn) {
+          const rect = magBtn.getBoundingClientRect();
+          const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.25;
+          const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.25;
+          magBtn.style.transform = `translate(${dx}px, ${dy}px)`;
+          if (cursorRing) cursorRing.classList.add('active-hover');
+        } else if (cursorRing) {
+          cursorRing.classList.remove('active-hover');
+        }
+      });
+
+      // Reset card tilt & button position when pointer leaves
+      document.addEventListener('mouseout', (e) => {
+        const card = e.target.closest('.glass-card');
+        if (card && !card.contains(e.relatedTarget)) {
+          card.style.transform = '';
+        }
+        const magBtn = e.target.closest('.magnetic-btn');
+        if (magBtn && !magBtn.contains(e.relatedTarget)) {
+          magBtn.style.transform = '';
+        }
+      });
+    }
+
+    // -----------------------------------------------------------------------
+    // 7. BOOTSTRAP ON WINDOW LOAD
+    // -----------------------------------------------------------------------
+    window.onload = function () {
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+      renderServices();
+      renderSkills();
+      renderFaqs();
+      renderPortfolio();
+      renderTestimonials();
+      renderAdminLeads();
+      syncContactUI();
+      initGlobal3DUniverse();
+      initInteractiveCardAndButtonFX();
+      lucide.createIcons();
+
+      // IntersectionObserver for Scroll Reveal Animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.08 });
+
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    };
+  </script>
+</body>
+</html>
